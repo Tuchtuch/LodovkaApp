@@ -1,0 +1,35 @@
+div.navBar{
+width: 100%;
+min-width: 1000px;
+height: 120px;
+background: #DDF2FF;
+box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+}
+div.logoNavBar{
+float: left;
+width: 370px;
+}
+div.logginButtons{
+float: right;
+width: 400px;
+height: 120px;
+background-image: url('../images/logo_ice.png');
+background-position: right;
+background-repeat: no-repeat;
+padding-top: 40px;
+}
+div.searchBar{
+    width: 100%;
+    min-width: 1000px;
+    height: 80px;
+}
+div.topHeader{
+    float: left;
+    margin-left: 140px;
+    padding-top: 25px;
+}
+div.searchInput{
+    float: right;
+    padding-top: 25px;
+    margin-right: 140px;
+}

@@ -1,0 +1,20 @@
+// Token and logged_user_id
+export const SET_TOKEN = "SET_TOKEN";
+export const SET_LOGGED_USERID = "SET_LOGGED_USERID";
+
+//Loaders
+export const SET_LOADER = "SET_LOADER";
+
+
+//AppState for appState reducer
+export const SET_APPSTATE = "SET_APPSTATE";
+
+export const APPSTATE_LOGGED_OFF = "APPSTATE_LOGGED_OFF";
+export const APPSTATE_LOGGED_AS_USER = "APPSTATE_LOGGED_AS_USER";
+export const APPSTATE_LOGGED_AS_WORKER = "APPSTATE_LOGGED_AS_WORKER";
+export const APPSTATE_LOGGED_AS_ADMIN = "APPSTATE_LOGGED_AS_ADMIN";
+
+export const SET_MAIN_APP_VIEW_STATE = "SET_MAIN_APP_VIEW_STATE";
+
+export const SET_MAIN_APP_ALERT = "SET_MAIN_APP_ALERT";
+

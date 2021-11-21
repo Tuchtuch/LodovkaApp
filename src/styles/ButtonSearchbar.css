@@ -1,0 +1,22 @@
+button.Searchbar{
+    background: #ddf2ff;
+    border: solid 2px black;
+    border-radius: 10px;
+    padding: 3px 10px 3px 10px;
+    width: 80px;
+    font-size: 14px;
+    margin-left: 30px;
+}
+button.Searchbar:hover{
+    background: #ceecff;
+    box-shadow: 0px 0px 10px rgb(131, 236, 255);
+}
+button.Searchbar:active{
+    scale: 95%;
+}
+input.SearchbarText{
+    background: white;
+    border-radius: 5px;
+    border: solid 1px black;
+    padding-left: 8px;
+}

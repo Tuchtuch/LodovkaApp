@@ -1,0 +1,16 @@
+button.NavbarButton{
+    background: white;
+    border: solid 2px black;
+    border-radius: 10px;
+    padding: 5px 30px 5px 30px;
+    width: 150px;
+    font-size: 18px;
+    margin-left: 30px;
+}
+button.NavbarButton:hover{
+    background: rgb(232, 250, 255);
+    box-shadow: 0px 0px 10px rgb(131, 236, 255);
+}
+button.NavbarButton:active{
+    scale: 95%;
+}
