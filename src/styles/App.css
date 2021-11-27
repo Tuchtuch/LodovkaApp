@@ -1,35 +1,162 @@
-div.navBar{
-width: 100%;
-min-width: 1000px;
-height: 120px;
-background: #DDF2FF;
-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+BODY{
+    font-family: 'Quicksand';
+    z-index: 0;
 }
-div.logoNavBar{
-float: left;
-width: 370px;
-}
-div.logginButtons{
-float: right;
-width: 400px;
-height: 120px;
-background-image: url('../images/logo_ice.png');
-background-position: right;
-background-repeat: no-repeat;
-padding-top: 40px;
-}
-div.searchBar{
+div.navBar {
     width: 100%;
-    min-width: 1000px;
+    min-width: 1100px;
+    height: 120px;
+    background: #DDF2FF;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    position:relative;
+    z-index: 1;
+}
+@font-face {
+    font-family: Quicksand;
+    src: url(../styles/quicksand.ttf);
+  }
+div.logoNavBar {
+    float: left;
+    width: 370px;
+}
+
+div.logginButtons {
+    float: right;
+    width: 400px;
+    height: 120px;
+    background-image: url('../images/logo_ice.png');
+    background-position: right;
+    background-repeat: no-repeat;
+    padding-top: 40px;
+}
+
+div.searchBar {
+    width: 100%;
+    min-width: 1100px;
     height: 80px;
 }
-div.topHeader{
+
+div.topHeader {
     float: left;
     margin-left: 140px;
     padding-top: 25px;
 }
-div.searchInput{
+
+div.searchInput {
     float: right;
     padding-top: 25px;
     margin-right: 140px;
+}
+
+div.cityButton {
+    background: #DDF2FF;
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
+
+div.iceCompanyButton {
+    width: 330px;
+    height: 200px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    border-radius: 10px;
+    background: #FFE3BA;
+    margin: 25px 17px 0px 17px;
+    display: inline-block;
+}
+
+div.topICB {
+    height: 135px;
+}
+div.bottomICB{
+    height: 65px;
+    background-image: url('../images/bottomICB.png');
+}
+div.leftBottomICB{
+    float: left;
+    line-height: 100%;
+}
+div.leftBottomICB ul li{
+    list-style: none;
+    padding-top: 4px;
+    font-size: 13px;
+    font-weight:550;
+}
+div.rightBottomICB{
+    float: right;
+    padding-right: 19px;
+    font-size: 16px;
+    line-height: 90%;
+    padding-top: 20px;
+    font-weight: 550;
+    text-align: center;
+}
+div.mainApp{
+    min-width: 1100px;
+    margin-left: 140px;
+    margin-right: 140px;
+}
+div.cityBar {
+    width: 100%;
+    min-width: 1100px;
+    height: 80px;
+}
+
+div.cityBarLeft {
+    float: left;
+    margin-left: 140px;
+    padding-top: 25px;
+}
+
+div.cityBarRight {
+    float: right;
+    padding-top: 25px;
+    margin-right: 140px;
+}
+div.smallDott{
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        position: absolute;
+        margin-top: -12px;
+        margin-left: 150px;
+}
+button.cityButton{
+    display: block;
+    background:#DDF2FF;
+    width: 200px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 5px 3px rgba(0, 0, 0, 0.521) ;
+    margin: 0 10px 10px 10px;
+    font-size: 16px;
+    display: inline-block;
+}
+div.leftCityButton{
+    float: left;
+    padding:0 0 0 10px;
+    width: 140px;
+    padding-top: 4px;
+    text-align:left;
+}
+div.rightCityButton{
+    float: right;
+    text-align: center;
+    width: 26px;
+    height: 26px;
+    margin-right: 10px;
+    background: #FFCFE6;
+    border-radius: 8px;
+    margin-top:4px;
+    padding-top:0px;
+}
+div.singleCityButton{
+    width: 200px;
+}
+
+div.cityList {
+width: 100%;
+min-width: 1100px;
+padding-left: 140px;
+padding-right: 140px;
 }

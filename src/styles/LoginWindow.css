@@ -1,0 +1,59 @@
+div.loginWindow {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    background: #DDF2FF;
+    width: 400px;
+    font-size: 14px;
+    min-height: 200px;
+    margin-top: -100px;
+    margin-left: -200px;
+    text-align: left;
+    padding-top: 5px;
+    border-radius: 20px;
+    border: solid 1px rgb(67, 0, 88);
+    background-image: url('../images/loginBG.png');
+    background-repeat: no-repeat;
+    background-position-x: right;
+    background-position-y: bottom;
+}
+
+div.loginWindowOverflow {
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 207, 230, 0.83);
+    z-index: 1;
+    position:absolute;
+    min-height: 100vh;
+}
+input.LoginWindowInput{
+    background: rgba(255, 255, 255, 0.699);
+    border: solid 2px black;
+    border-radius: 10px;
+    padding: 5px 0 5px 10px;
+    width: 300px;
+    margin-top: 5px;
+}
+button.LoginWindowButton{
+    background: white;
+    border: solid 2px black;
+    border-radius: 10px;
+    padding: 5px 30px 5px 30px;
+    width: 160px;
+    margin: 20px 0 20px 0;
+
+}
+button.LoginWindowButton:hover{
+    background: rgb(232, 250, 255);
+    box-shadow: 0px 0px 10px rgb(131, 236, 255);
+}
+button.LoginWindowButton:active{
+    scale: 95%;
+}
+div.loginCentering{
+    text-align:center;
+}
+div.loginBody{
+    width: 100%;
+    padding-left: 30px;
+}
