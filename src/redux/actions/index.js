@@ -3,7 +3,10 @@ import { SET_APPSTATE } from "../constants/action_types";
 import { SET_LOGGED_USERID } from "../constants/action_types";
 import { SET_LOADER } from "../constants/action_types";
 import { SET_MAIN_APP_VIEW_STATE } from "../constants/action_types";
+import { SET_SUB_APP_VIEW_STATE } from "../constants/action_types";
 import { SET_MAIN_APP_ALERT } from "../constants/action_types";
+import { SET_ICECREAM } from "../constants/action_types";
+import { SET_ICECOMPANY } from "../constants/action_types";
 
 export function setToken(payload) {
   return { type: SET_TOKEN, payload };
@@ -22,4 +25,13 @@ export function setMainAppAlert(payload) {
 }
 export function setMainViewApp(payload) {
   return { type: SET_MAIN_APP_VIEW_STATE, payload };
+}
+export function setSubViewApp(payload) {
+  return { type: SET_SUB_APP_VIEW_STATE, payload };
+}
+export function setIceCream(payload) {
+  return { type: SET_ICECREAM, payload };
+}
+export function setIceCompany(payload) {
+  return { type: SET_ICECOMPANY, payload };
 }

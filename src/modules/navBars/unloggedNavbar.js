@@ -17,12 +17,23 @@ class UnloggedNavbarDis extends React.Component {
         this.state = {
         }
     }
+    openLogin(){
+        document.getElementsByTagName("body")[0].style.overflow = 'hidden';
+        document.getElementsByClassName("loginWindowOverflow")[0].style.display = 'block';
+        document.getElementsByClassName("registerWindowOverflow")[0].style.display = 'none';
+    }
+    openRegister(){
+        document.getElementsByTagName("body")[0].style.overflow = 'hidden';
+        document.getElementsByClassName("registerWindowOverflow")[0].style.display = 'block';
+        document.getElementsByClassName("loginWindowOverflow")[0].style.display = 'none';
+    }
+
 
     render(){
         return(
             <div className="navBar">
                 <div className="logoNavBar"><img src={Logo} alt ="Logo" /></div>
-                <div className="logginButtons"><button className="NavbarButton">Zaloguj się</button><button className="NavbarButton">Dołącz</button></div>
+                <div className="logginButtons"><button className="NavbarButton" onClick={()=>this.openLogin()}>Zaloguj się</button><button className="NavbarButton" onClick={()=>this.openRegister()}>Dołącz</button></div>
             </div>
         )
     }
