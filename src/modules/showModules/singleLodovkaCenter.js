@@ -32,7 +32,8 @@ class SingleLodovkaCenterDis extends React.Component {
             pierwszyLod: '',
             drugiLod: '',
             trzeciLod: '',
-            id: props.id
+            id: props.id,
+            key: props.key
         }
     }
 

@@ -8,8 +8,6 @@ import firebase from '@firebase/app-compat';
 //import { doc, onSnapshot } from "firebase/firestore";
 
 
-
-
 function mapDispatchToProps(dispatch) {
     return {
         setMainViewApp: mainViewAppState => dispatch(setMainViewApp(mainViewAppState)),
@@ -30,27 +28,31 @@ class MainAppDis extends React.Component {
         super(props);
         this.state = {
             companies: '',
-            companiesIds: '',
+            companiesIds: [],
         }
     }
 
     iceCompanyToSingle = icecompany => {
-        if(icecompany.firstIceRec!=='' && icecompany.secondIceRec!=='' && icecompany.thirdIceRec!=='')
-        return (
-            <SingleLodovkaCenter
-                id={this.state.companiesIds[currentId]}
-                key={currentId}
-                title={icecompany.name}
-                firstRecommend={icecompany.firstIceRec}
-                secondRecommend={icecompany.secondIceRec}
-                thirdRecommend={icecompany.thirdIceRec}
-                firstColor={icecompany.firstColor}
-                secondColor={icecompany.secondColor}
-                thirdColor={icecompany.thirdColor}
-                lowerPrice={icecompany.lowerPrice}
-                maxPrice={icecompany.maxPrice}
-            />
-        )
+        if (icecompany.firstIceRec !== '' && icecompany.secondIceRec !== '' && icecompany.thirdIceRec !== '') {
+            return (
+                <SingleLodovkaCenter
+                    id={this.state.companiesIds[currentId]}
+                    key={this.state.companiesIds[currentId++]}
+                    title={icecompany.name}
+                    firstRecommend={icecompany.firstIceRec}
+                    secondRecommend={icecompany.secondIceRec}
+                    thirdRecommend={icecompany.thirdIceRec}
+                    firstColor={icecompany.firstColor}
+                    secondColor={icecompany.secondColor}
+                    thirdColor={icecompany.thirdColor}
+                    lowerPrice={icecompany.lowerPrice}
+                    maxPrice={icecompany.maxPrice}
+                />
+            )
+        }
+        else{
+            currentId++;
+        }
     }
 
 
@@ -58,7 +60,7 @@ class MainAppDis extends React.Component {
         const snapshot = await firebase.firestore().collection('companies').get();
         this.setState({
             companies: snapshot.docs.map(doc => doc.data()),
-            companiesIds: snapshot.docs.map(doc => doc.id),
+            companiesIds: snapshot.docs.map(doc => doc.id)
         })
     }
     componentDidMount() {
@@ -92,7 +94,7 @@ class MainAppDis extends React.Component {
                 if (this.props.iceCream) {
                     return (
                         <div className="mainApp">
-                            <SingleIceCompany id={this.props.iceCompany}/>
+                            <SingleIceCompany id={this.props.iceCompany} />
                         </div>
                     );
                 }
@@ -110,6 +112,7 @@ class MainAppDis extends React.Component {
     render() {
         return (
             this.renderSwitch()
+
         )
     }
 
