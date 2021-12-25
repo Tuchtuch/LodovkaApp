@@ -35,6 +35,7 @@ class MainAppDis extends React.Component {
     }
 
     iceCompanyToSingle = icecompany => {
+        if(icecompany.firstIceRec!=='' && icecompany.secondIceRec!=='' && icecompany.thirdIceRec!=='')
         return (
             <SingleLodovkaCenter
                 id={this.state.companiesIds[currentId]}

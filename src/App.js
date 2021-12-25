@@ -15,6 +15,7 @@ import 'firebase/compat/firestore'; //v9
 import 'firebase/compat/auth'; //v9
 //import {useAuthState} from 'react-firebase-hooks/auth';
 //import {useCollectionData} from 'react-firebase-hooks/firestore';
+import AddingIceCompanyDis from './modules/showModules/addingIceCompany';
 
 firebase.initializeApp({
   apiKey: "AIzaSyDTjM4fo4A6EVCiSegVL3ggC9fyMcyhuLQ",
@@ -53,6 +54,7 @@ const funcApp = ({ appState }) => {
         <SearchBar/>
         <MainApp/>
         <CityBar/>
+        <AddingIceCompanyDis/>
       </div>
     )
     case APPSTATE_LOGGED_AS_ADMIN: return (

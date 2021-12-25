@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { setMainViewApp } from './redux/actions';
 import { setAppstate } from './redux/actions';
+import { setLoggedUserId } from './redux/actions';
 import { APPSTATE_LOGGED_AS_USER } from './redux/constants/action_types';
 import LoginLogo from './images/loginLogo.png';
 import Close from './images/icons/close.png';
@@ -12,6 +13,7 @@ function mapDispatchToProps(dispatch) {
     return {
         setMainViewApp: mainViewAppState => dispatch(setMainViewApp(mainViewAppState)),
         setAppstate: appState => dispatch(setAppstate(appState)),
+        setLoggedUserId: loggedUserId => dispatch(setLoggedUserId(loggedUserId))
     };
 }
 
@@ -33,7 +35,7 @@ class LoginPanelDis extends React.Component {
             .signInWithEmailAndPassword(this.state.userName, this.state.password)
             .then((userCredential) => {
                 // Signed in 
-              //  const user = userCredential.user;
+                this.props.setLoggedUserId(userCredential.user.email);
                 this.props.setAppstate(APPSTATE_LOGGED_AS_USER);
                 this.showOverflow();
                 // ...

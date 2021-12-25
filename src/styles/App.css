@@ -86,6 +86,7 @@ div.leftBottomICB ul li {
     padding-top: 4px;
     font-size: 13px;
     font-weight: 550;
+    cursor: pointer;
 }
 
 div.rightBottomICB {
@@ -180,27 +181,78 @@ div.showIceCompany {
     width: 1100px;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     border-radius: 10px;
+    display:flex;
 }
+
 
 div.showIceCompanyLeft {
-    float:left;
-    width: 517px;
-    height: 100%;
     background: rgb(255, 227, 186);
-}
-
-div.showIceCompanyRight {
-    background: rgb(221, 242, 255);
+    flex-direction: row;
     width: 517px;
-    float:left;
-    height: 100%;
 }
 
 div.showIceCompanyCenter {
     width: 66px;
     float:left;
-    height: 100%;
+
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-image: url('../images/iceCompanyCenter.png');
+    flex-direction: row;
+}
+div.showIceCompanyRight {
+    background: rgb(221, 242, 255);
+    flex-direction: row;
+    width: 517px;
+    text-align:left;
+    padding-left: 80px;
+    padding-bottom: 30px;
+    padding-top: 25px;
+    color:rgb(80, 80, 80)
+}
+h2.companyWelcome{
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+    font-size: 20px;
+    font-weight: bold;
+}
+div.bottomInfo{
+        margin: 30px auto;
+        width: 1100px;
+        font-size: 12px;
+}
+div.detailsInCompany{
+    margin: 0 auto;
+    width: 1100px; 
+    display: flex;
+}
+div.productsInCompany{
+    flex-direction: row;
+    width: 550px;
+}
+div.mapOfCompany{
+    flex-direction: row;
+    width: 550px;
+}
+div.iceInCompany{
+    width: 500px;
+    min-height: 120px;
+    display: flex;
+    background: #ddf2ff;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    margin: 40px 0 40px 0;
+}
+div.iceInCompanyImg{
+    flex-direction: row;
+    width: 150px;
+}
+div.iceInCompanyCenter{
+    flex-direction: row;
+    width: 350px;
+    display: flex;
+}
+div.iceInCompanyRight{
+    width: 80px;
+    background: #f9d5ea;
+    margin-left: 200px;
 }

@@ -5,12 +5,14 @@ import { setAppstate } from '../../redux/actions';
 import Logo from '../../images/logo_navbar.png';
 import '../../styles/ButtonLogin.css';
 import firebase from 'firebase/compat/app'; //v9
+import { setLoggedUserId } from '../../redux/actions';
 import { APPSTATE_LOGGED_OFF } from '../../redux/constants/action_types';
 
 function mapDispatchToProps(dispatch) {
     return {
         setMainViewApp: mainViewAppState => dispatch(setMainViewApp(mainViewAppState)),
         setAppstate: appState => dispatch(setAppstate(appState)),
+        setLoggedUserId: loggedUserId => dispatch(setLoggedUserId(loggedUserId))
     };
 }
 
@@ -23,6 +25,7 @@ class LoggedNavbarDis extends React.Component {
 
     logout(){
         firebase.auth().signOut();
+        this.props.setLoggedUserId('');
         this.props.setAppstate(APPSTATE_LOGGED_OFF);
     }
 
