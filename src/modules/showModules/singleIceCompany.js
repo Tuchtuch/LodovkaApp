@@ -4,12 +4,14 @@ import { connect } from 'react-redux';
 import { setMainViewApp } from '../../redux/actions';
 import firebase from '@firebase/app-compat';
 import Iframe from 'react-iframe';
-
+import { setLoader } from '../../redux/actions';
+import noImg from '../../images/noImg.png';
 
 
 function mapDispatchToProps(dispatch) {
     return {
         setMainViewApp: mainViewAppState => dispatch(setMainViewApp(mainViewAppState)),
+        setLoader: isLoading => dispatch(setLoader(isLoading))
     };
 }
 
@@ -18,37 +20,62 @@ class SingleIceCompanyDis extends React.Component {
         super(props);
         this.state = {
             company: '',
-            id: props.id
+            id: props.id,
+            ices: [],
         }
     }
 
     componentDidMount() {
-        this.ladujFirme()
+        this.ladujFirme();
+        this.ladujLody();
     }
 
     async ladujFirme() {
+        this.props.setLoader(true);
         const snapshot = await firebase.firestore().collection('companies').doc(this.state.id).get();
         this.setState({
             company: snapshot.data()
         })
+        this.props.setLoader(false);
+    }
+    async ladujLody() {
+        this.props.setLoader(true);
+        const snapshot = await firebase.firestore().collection('icecreams').where("companyId", "==", this.state.id).get();
+        this.setState({
+            ices: snapshot.docs.map(doc => doc.data()),
+        });
+        this.props.setLoader(false);
     }
 
     generujLink() {
         var lat = Object(this.state.company.localisation)._lat;
         var long = Object(this.state.company.localisation)._long;
-
         return "https://maps.google.com/maps?q=" + lat + ", " + long + "&z=15&output=embed";
 
+    }
+    iceToSingle = ice => {
+        return (
+            <div className="iceInCompany">
+                <div className="iceInCompanyImg"><img src={noImg} alt="img" /></div>
+                <div className="iceInCompanyCenter">
+                    <h2 className="iceH2">{ice.name}</h2>
+                    <h3 className="iceH3">{ice.description}</h3>
+                </div>
+                <div className="iceInCompanyRight">{ice.price} PLN</div>
+            </div>
+        )
+    }
+    iceMaper() {
+        return (this.state.ices.map(this.iceToSingle))
     }
 
     render() {
         return (
             <div className="IceCompanyMain">
                 <div className="showIceCompany">
-                    <div className="showIceCompanyLeft">TUTAJ FIRMA {this.state.id}</div>
+                    <div className="showIceCompanyLeft"><img src={noImg} alt="Logo" /></div>
                     <div className="showIceCompanyCenter">&nbsp;</div>
                     <div className="showIceCompanyRight"><h2 className="companyWelcome">{this.state.company.powitanie}</h2><br />{this.state.company.description}<br /><br />{this.state.company.city}, ul. {this.state.company.street}</div>
-                    {console.log(this.state.company)}
                 </div>
                 <div className="bottomInfo">
                     Za informację na stronie&nbsp;
@@ -58,18 +85,7 @@ class SingleIceCompanyDis extends React.Component {
                 </div>
                 <div className="detailsInCompany">
                     <div className="productsInCompany">
-                        <div className="iceInCompany">
-                            <div className="iceInCompanyImg">IMG</div>
-                            <div className="iceInCompanyCenter">center
-                                <div className="iceInCompanyRight">tu</div>
-                            </div>
-                        </div>
-                        <div className="iceInCompany">
-                            <div className="iceInCompanyImg">IMG</div>
-                            <div className="iceInCompanyCenter">center
-                                <div className="iceInCompanyRight">tu</div>
-                            </div>
-                        </div>
+                        {this.iceMaper()}
                     </div>
                     <div className="mapOfCompany">
                         <Iframe title="mapa" src={this.generujLink()} width="500" height="500" frameborder="0"></Iframe>

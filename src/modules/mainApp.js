@@ -5,7 +5,7 @@ import { setSubViewApp } from '../redux/actions';
 import SingleLodovkaCenter from './showModules/singleLodovkaCenter';
 import SingleIceCompany from './showModules/singleIceCompany';
 import firebase from '@firebase/app-compat';
-import AddingIceCompanyDis from '../modules/showModules/addingIceCompany';
+import AddingIceCompany from '../modules/showModules/addingIceCompany';
 import { setLoader } from '../redux/actions';
 //import { doc, onSnapshot } from "firebase/firestore";
 
@@ -72,6 +72,7 @@ class MainAppDis extends React.Component {
         this.ladujFirmy();
     }
     maperIceCompany() {
+        currentId=0;
         return (this.state.companies.map(this.iceCompanyToSingle))
     }
 
@@ -112,7 +113,7 @@ class MainAppDis extends React.Component {
                 }
             case 3: return (
                 <div className="mainApp">
-                   <AddingIceCompanyDis/>
+                   <AddingIceCompany/>
                 </div>
             );
             default: return (<div>{console.log(this.props.subViewAppState)}DOMYŚLNY</div>);

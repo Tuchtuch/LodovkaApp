@@ -66,7 +66,7 @@ class RegisterPanelDis extends React.Component {
                 <div className="loginWindow">
                     <div className="loginCentering"><img src={LoginLogo} alt="Logo"/><img src={Close} alt="X" className="closeButton" onClick={()=>this.showOverflow()}/></div>
                     <div className="loginBody">
-                    Login<br />
+                    Mail<br />
                     <input className="LoginWindowInput" type="text"   onChange={(e) => this.setState({userNameReg: e.target.value })}/><br />
                     Hasło<br />
                     <input className="LoginWindowInput" type="password"  onChange={(e) => this.setState({passwordReg: e.target.value })}/><br />
