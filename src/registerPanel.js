@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setMainViewApp } from './redux/actions';
+import { setSubViewApp } from './redux/actions';
 import { setAppstate } from './redux/actions';
 import { setLoggedUserId } from './redux/actions';
 import { APPSTATE_LOGGED_AS_USER } from './redux/constants/action_types';
@@ -10,7 +10,7 @@ import firebase from '@firebase/app-compat';
 
 function mapDispatchToProps(dispatch) {
     return {
-        setMainViewApp: mainViewAppState => dispatch(setMainViewApp(mainViewAppState)),
+        setSubViewApp: subViewAppState => dispatch(setSubViewApp(subViewAppState)),
         setAppstate: appState => dispatch(setAppstate(appState)),
         setLoggedUserId: loggedUserId => dispatch(setLoggedUserId(loggedUserId))
     };
@@ -39,6 +39,7 @@ class RegisterPanelDis extends React.Component {
                this.props.setLoggedUserId(userCredential.user.email);
                 this.props.setAppstate(APPSTATE_LOGGED_AS_USER);
                 this.showOverflow();
+                this.props.setSubViewApp(1);
                 // ...
               })
               .catch((error) => {

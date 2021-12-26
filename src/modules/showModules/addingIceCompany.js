@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { setMainViewApp } from '../../redux/actions';
 import firebase from '@firebase/app-compat';
+import AddingIce from './addingIce';
+import { setLoader } from '../../redux/actions';
 //import GeoPoint from 'geopoint';
 
 const mapStateToProps = state => {
@@ -12,6 +14,7 @@ const mapStateToProps = state => {
 function mapDispatchToProps(dispatch) {
     return {
         setMainViewApp: mainViewAppState => dispatch(setMainViewApp(mainViewAppState)),
+        setLoader: isLoading => dispatch(setLoader(isLoading))
     };
 }
 
@@ -34,15 +37,17 @@ class AddingIceCompanyDis extends React.Component {
         }
     }
     async ladujFirmy() {
+        this.props.setLoader(true);
         const snapshot = await firebase.firestore().collection('companies').where("owner", "==", this.props.loggedUserId).get();
         this.setState({
-            myCompany: snapshot.docs.map(doc => doc.data()),
-        })
+            myCompany: snapshot.docs.map(doc => doc.id),
+        });
+        this.props.setLoader(false);
     }
 
     async dodaj() {
-        if (this.state.nameOf.length > 15 || this.state.nameOf.length < 3) {
-            alert('Nazwa może mieć od 3 do 15 znaków.')
+        if (this.state.nameOf.length > 20 || this.state.nameOf.length < 3) {
+            alert('Nazwa może mieć od 3 do 20 znaków.')
         }
         else if (this.state.description.length < 10 || this.state.description.length > 200) {
             alert('Opis może mieć od 10 do 200 znaków.')
@@ -104,12 +109,12 @@ class AddingIceCompanyDis extends React.Component {
         };
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.ladujFirmy();
     }
 
     render() {
-        if (this.state.myCompany.length===0) {
+        if (this.state.myCompany.length === 0) {
             return (
                 <div className="iceCompanyForm">
                     Nazwa lodziarni: <input className="formInput" type="text" onChange={(e) => this.setState({ nameOf: e.target.value })} /><br />
@@ -128,7 +133,11 @@ class AddingIceCompanyDis extends React.Component {
         }
         else {
             return (
-            <div className="iceCompanyForm">Posiadasz już lodziarnię</div>
+                <div className="iceCompanyForm">Posiadasz już lodziarnię. Zarządzaj, Dodaj nowe lody.
+                    <br />
+                    <AddingIce companyId={this.state.myCompany[0]} />
+                </div>
+
             )
         }
     }

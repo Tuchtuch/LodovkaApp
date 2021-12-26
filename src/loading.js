@@ -1,5 +1,5 @@
 import React from 'react';
-import LoadSpinner from './images/spinner.png';
+import LoadSpinner from './images/spinner.gif';
 import { connect } from 'react-redux';
 
 const mapStateToProps = state => {

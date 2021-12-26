@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setMainViewApp } from '../../redux/actions';
+import { setSubViewApp } from '../../redux/actions';
 import Logo from '../../images/logo_navbar.png';
 import '../../styles/ButtonLogin.css';
 
 
 function mapDispatchToProps(dispatch) {
     return {
-        setMainViewApp: mainViewAppState => dispatch(setMainViewApp(mainViewAppState)),
+        setSubViewApp: subViewAppState => dispatch(setSubViewApp(subViewAppState)),
     };
 }
 
@@ -32,7 +32,7 @@ class UnloggedNavbarDis extends React.Component {
     render(){
         return(
             <div className="navBar">
-                <div className="logoNavBar"><img src={Logo} alt ="Logo" /></div>
+                <div className="logoNavBar"><img src={Logo} alt ="Logo"  onClick={()=>this.props.setSubViewApp(1)} /></div>
                 <div className="logginButtons"><button className="NavbarButton" onClick={()=>this.openLogin()}>Zaloguj się</button><button className="NavbarButton" onClick={()=>this.openRegister()}>Dołącz</button></div>
             </div>
         )

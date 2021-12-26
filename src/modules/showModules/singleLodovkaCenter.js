@@ -5,6 +5,7 @@ import { setSubViewApp } from '../../redux/actions';
 import { setIceCream } from '../../redux/actions';
 import { setIceCompany } from '../../redux/actions';
 import firebase from '@firebase/app-compat';
+import noImg from '../../images/noImg.png';
 
 
 function mapDispatchToProps(dispatch) {
@@ -60,7 +61,7 @@ class SingleLodovkaCenterDis extends React.Component {
     render() {
         return (
             <div className="iceCompanyButton">
-                <div className="topICB">Tutaj logo</div>
+                <div className="topICB"><img src={noImg} alt="Brak zdjęcia"/></div>
                 <div className="bottomICB">
                     <div className="leftBottomICB">
                         <ul>

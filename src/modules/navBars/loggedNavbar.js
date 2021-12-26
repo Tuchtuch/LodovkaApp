@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { setMainViewApp } from '../../redux/actions';
+import { setSubViewApp } from '../../redux/actions';
 import { setAppstate } from '../../redux/actions';
 import Logo from '../../images/logo_navbar.png';
 import '../../styles/ButtonLogin.css';
@@ -12,7 +13,8 @@ function mapDispatchToProps(dispatch) {
     return {
         setMainViewApp: mainViewAppState => dispatch(setMainViewApp(mainViewAppState)),
         setAppstate: appState => dispatch(setAppstate(appState)),
-        setLoggedUserId: loggedUserId => dispatch(setLoggedUserId(loggedUserId))
+        setLoggedUserId: loggedUserId => dispatch(setLoggedUserId(loggedUserId)),
+        setSubViewApp: subViewAppState => dispatch(setSubViewApp(subViewAppState))
     };
 }
 
@@ -27,14 +29,19 @@ class LoggedNavbarDis extends React.Component {
         firebase.auth().signOut();
         this.props.setLoggedUserId('');
         this.props.setAppstate(APPSTATE_LOGGED_OFF);
+        this.props.setSubViewApp(1);
+    }
+
+    zarzadzaj(){
+        this.props.setSubViewApp(3);
     }
 
 
     render(){
         return(
             <div className="navBar">
-                <div className="logoNavBar"><img src={Logo} alt ="Logo" /></div>
-                <div className="logginButtons"><button className="NavbarButton" onClick={()=>this.logout()}>Wyloguj się</button></div>
+                <div className="logoNavBar"><img src={Logo} alt ="Logo" onClick={()=>this.props.setSubViewApp(1)} /></div>
+                <div className="logginButtons"><button className="NavbarButton" onClick={()=>this.logout()}>Wyloguj się</button><button className="NavbarButton" onClick={()=>this.zarzadzaj()}>Zarządzaj</button></div>
             </div>
         )
     }

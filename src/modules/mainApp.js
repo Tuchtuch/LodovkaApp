@@ -5,13 +5,16 @@ import { setSubViewApp } from '../redux/actions';
 import SingleLodovkaCenter from './showModules/singleLodovkaCenter';
 import SingleIceCompany from './showModules/singleIceCompany';
 import firebase from '@firebase/app-compat';
+import AddingIceCompanyDis from '../modules/showModules/addingIceCompany';
+import { setLoader } from '../redux/actions';
 //import { doc, onSnapshot } from "firebase/firestore";
 
 
 function mapDispatchToProps(dispatch) {
     return {
         setMainViewApp: mainViewAppState => dispatch(setMainViewApp(mainViewAppState)),
-        setSubViewApp: subViewAppState => dispatch(setSubViewApp(subViewAppState))
+        setSubViewApp: subViewAppState => dispatch(setSubViewApp(subViewAppState)),
+        setLoader: isLoading => dispatch(setLoader(isLoading))
     };
 }
 const mapStateToProps = state => {
@@ -50,18 +53,20 @@ class MainAppDis extends React.Component {
                 />
             )
         }
-        else{
+        else {
             currentId++;
         }
     }
 
 
     async ladujFirmy() {
+        this.props.setLoader(true);
         const snapshot = await firebase.firestore().collection('companies').get();
         this.setState({
             companies: snapshot.docs.map(doc => doc.data()),
             companiesIds: snapshot.docs.map(doc => doc.id)
         })
+        this.props.setLoader(false)
     }
     componentDidMount() {
         this.ladujFirmy();
@@ -105,7 +110,11 @@ class MainAppDis extends React.Component {
                         </div>
                     );
                 }
-
+            case 3: return (
+                <div className="mainApp">
+                   <AddingIceCompanyDis/>
+                </div>
+            );
             default: return (<div>{console.log(this.props.subViewAppState)}DOMYŚLNY</div>);
         }
     }
