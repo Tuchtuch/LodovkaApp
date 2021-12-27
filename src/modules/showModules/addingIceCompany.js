@@ -5,6 +5,7 @@ import firebase from '@firebase/app-compat';
 import AddingIce from './addingIce';
 import { setLoader } from '../../redux/actions';
 import SetRecommends from './setRecommends';
+import AddingFile from './addingFile';
 //import GeoPoint from 'geopoint';
 
 const mapStateToProps = state => {
@@ -102,7 +103,7 @@ class AddingIceCompanyDis extends React.Component {
                 thirdIceRec: ''
             })
                 .then((docRef) => {
-                    console.log("Dodano dokumento numerze ID: ", docRef.id);this.ladujFirmy();
+                    console.log("Dodano dokumento numerze ID: ", docRef.id); this.ladujFirmy();
                 })
                 .catch((error) => {
                     console.error("Błąd: ", error);
@@ -135,9 +136,10 @@ class AddingIceCompanyDis extends React.Component {
         else {
             return (
                 <div className="iceCompanyForm">Posiadasz już lodziarnię. <br />
-                ----------------------------<br />
-                <SetRecommends companyId={this.state.myCompany[0]} />
-                <br />Dodaj nowe lody.
+                <AddingFile/>
+                    ----------------------------<br />
+                    <SetRecommends companyId={this.state.myCompany[0]} />
+                    <br />Dodaj nowe lody.
                     <br />
                     <AddingIce companyId={this.state.myCompany[0]} />
                 </div>

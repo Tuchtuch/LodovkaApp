@@ -11,8 +11,8 @@ import './styles/LoginWindow.css';
 import { APPSTATE_LOGGED_OFF, APPSTATE_LOGGED_AS_USER, APPSTATE_LOGGED_AS_ADMIN } from './redux/constants/action_types';
 import firebase from 'firebase/compat/app'; //v9
 import 'firebase/compat/firestore'; //v9
-//import { initializeApp } from "firebase/app";
 import 'firebase/compat/auth'; //v9
+import 'firebase/compat/storage';
 //import {useAuthState} from 'react-firebase-hooks/auth';
 //import {useCollectionData} from 'react-firebase-hooks/firestore';
 
