@@ -26,25 +26,28 @@ class AddingFileDis extends React.Component {
         this.onChange = this.onChange.bind(this);
         this.state = {
             file: '',
+            option: this.props.option,
+            companyId: this.props.companyId,
+            iceCreamId: this.props.iceCreamId
         }
     }
-/*
-    uploadFile(){
-        // 'file' comes from the Blob or File API
-        var uuid = require("uuid");
-        var id = uuid.v4();
-        firebase.storage().ref().child('images/'+id).put(this.state.file);
-    }*/
 
     uploadFile() {
+        var path;
+        if (this.state.option === 0) {
+            path = 'companies';
+        }
+        else if(this.state.option === 1){
+            path = 'icecreams';
+        }
         var metadata = {
             contentType: 'image/jpeg'
         };
         var uuid = require("uuid");
         var id = uuid.v4();
         // Upload file and metadata to the object 'images/mountains.jpg'
-        var uploadTask = firebase.storage().ref().child('images/'+id).put(this.state.file,metadata);
-        
+        var uploadTask = firebase.storage().ref().child(path + '/' + id).put(this.state.file, metadata);
+
         // Listen for state changes, errors, and completion of the upload.
         uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
             (snapshot) => {
@@ -86,7 +89,24 @@ class AddingFileDis extends React.Component {
                 // Upload completed successfully, now we can get the download URL
                 uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
                     console.log('File available at', downloadURL);
+                    if (this.state.option === 0) {
+                        //Jak firma
+                        firebase.firestore().collection('companies')
+                            .doc(this.state.companyId)
+                            .update({
+                                "imgLink": downloadURL,
+                            });
+                    }
+                    else if (this.state.option === 1) {
+                        //jak lód
+                        firebase.firestore().collection('icecreams')
+                        .doc(this.state.iceCreamId)
+                        .update({
+                            "imgLink": downloadURL,
+                        });
+                    }
                 });
+
             }
         );
     }
@@ -99,7 +119,7 @@ class AddingFileDis extends React.Component {
             return false;
         }
         else {
-            var maxFileSize = 100000; //100KB~
+            var maxFileSize = 200000; //200KB~
             var ext = this.state.file.name.split('.').pop();
             if (this.state.file.size > maxFileSize) return false;
             if (!imageExt.includes(ext)) return false;
@@ -115,21 +135,20 @@ class AddingFileDis extends React.Component {
     showButton() {
         if (this.imageValidator()) {
             return (
-                <button onClick={() => this.uploadFile()}>Dodaj</button>
+                <button className="NavbarButton" onClick={() => this.uploadFile()}>Dodaj</button>
             )
         }
         else {
             return (
-                <button disabled>Dodaj</button>
+                <button className="NavbarButton" disabled>Dodaj</button>
             )
         }
     }
 
     render() {
-        console.log(this.imageValidator())
         return (
             <div className="iceForm">
-                <input type="file" onChange={this.onChange} accept="image/png, image/jpeg, image/jpg" />
+                <input className="fileButton" type="file" onChange={this.onChange} accept="image/png, image/jpeg, image/jpg" />
                 {this.showButton()}
             </div>
         )

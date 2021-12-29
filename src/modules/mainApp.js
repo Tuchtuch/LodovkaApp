@@ -50,6 +50,7 @@ class MainAppDis extends React.Component {
                     thirdColor={icecompany.thirdColor}
                     lowerPrice={icecompany.lowerPrice}
                     maxPrice={icecompany.maxPrice}
+                    imgLink={icecompany.imgLink}
                 />
             )
         }

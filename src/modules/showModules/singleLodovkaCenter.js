@@ -6,6 +6,7 @@ import { setIceCream } from '../../redux/actions';
 import { setIceCompany } from '../../redux/actions';
 import firebase from '@firebase/app-compat';
 import noImg from '../../images/noImg.png';
+import { setLoader } from '../../redux/actions';
 
 
 function mapDispatchToProps(dispatch) {
@@ -14,6 +15,7 @@ function mapDispatchToProps(dispatch) {
         setSubViewApp: subViewAppState => dispatch(setSubViewApp(subViewAppState)),
         setIceCream: iceCream => dispatch(setIceCream(iceCream)),
         setIceCompany: iceCompany => dispatch(setIceCompany(iceCompany)),
+        setLoader: isLoading => dispatch(setLoader(isLoading))
     };
 }
 
@@ -21,6 +23,7 @@ class SingleLodovkaCenterDis extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            imgLink: props.imgLink,
             companyId: props.companyId,
             firstRecommend: props.firstRecommend,
             secondRecommend: props.secondRecommend,
@@ -43,6 +46,7 @@ class SingleLodovkaCenterDis extends React.Component {
     }
 
     async ladujLody() {
+        this.props.setLoader(true);
         const snapshot1 = await firebase.firestore().collection('icecreams').doc(this.state.firstRecommend).get();
         const snapshot2 = await firebase.firestore().collection('icecreams').doc(this.state.secondRecommend).get();
         const snapshot3 = await firebase.firestore().collection('icecreams').doc(this.state.thirdRecommend).get();
@@ -52,22 +56,31 @@ class SingleLodovkaCenterDis extends React.Component {
             trzeciLod : snapshot3.data().name
 
         })
+        this.props.setLoader(false);
     }
     PokazLoda(key){
         this.props.setIceCream(key);
         this.props.setIceCompany(this.state.id);
         this.props.setSubViewApp(2);
     }
+    showImage(imgLink){
+        if(!imgLink){
+            return (<div><img src={noImg} alt="img" /></div>)
+        }
+        else {
+            return (<img src={imgLink} className="singleLodovkaImg" alt="logo"/>)
+        }
+    }
     render() {
         return (
             <div className="iceCompanyButton">
-                <div className="topICB"><img src={noImg} alt="Brak zdjęcia"/></div>
+                <div className="topICB">{this.showImage(this.state.imgLink)}</div>
                 <div className="bottomICB">
                     <div className="leftBottomICB">
                         <ul>
-                            <li onClick={()=>this.PokazLoda(this.state.firstRecommend)}>{this.state.pierwszyLod}</li><div className="smallDott" style={{ background: '#' + this.state.firstColor, boxShadow: '0px 0px 1.5px ' + this.state.firstColor + '' }} ></div>
-                            <li onClick={()=>this.PokazLoda(this.state.secondRecommend)}>{this.state.drugiLod}</li><div className="smallDott" style={{ background: '#' + this.state.secondColor, boxShadow: '0px 0px 1.5px ' + this.state.secondColor + '' }}></div>
-                            <li onClick={()=>this.PokazLoda(this.state.thirdRecommend)}>{this.state.trzeciLod}</li><div className="smallDott" style={{ background: '#' + this.state.thirdColor, boxShadow: '0px 0px 1.5px ' + this.state.thirdColor + '' }}></div>
+                            <li onClick={()=>this.PokazLoda(this.state.firstRecommend)}>{this.state.pierwszyLod}</li><div className="smallDott" style={{ background: this.state.firstColor, boxShadow: '0px 0px 1.5px ' + this.state.firstColor + '' }} ></div>
+                            <li onClick={()=>this.PokazLoda(this.state.secondRecommend)}>{this.state.drugiLod}</li><div className="smallDott" style={{ background: this.state.secondColor, boxShadow: '0px 0px 1.5px ' + this.state.secondColor + '' }}></div>
+                            <li onClick={()=>this.PokazLoda(this.state.thirdRecommend)}>{this.state.trzeciLod}</li><div className="smallDott" style={{ background:  this.state.thirdColor, boxShadow: '0px 0px 1.5px ' + this.state.thirdColor + '' }}></div>
                         </ul>
                     </div>
                     <div className="rightBottomICB">

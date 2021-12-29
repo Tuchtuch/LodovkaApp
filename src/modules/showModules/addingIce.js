@@ -24,15 +24,15 @@ class AddingIceDis extends React.Component {
         this.state = {
             american: false,
             companyId: this.props.companyId,
-            description: false,
+            description: '',
             freshy: false,
             fruity: false,
             icing: false,
             italy: false,
             milky: false,
-            nameOf: false,
-            price: false,
-            producer: false,
+            nameOf: '',
+            price: '',
+            producer: '',
             salty: false,
             sherbet: false,
             sour: false,
@@ -95,7 +95,7 @@ class AddingIceDis extends React.Component {
                 Opis loda: <input className="formInput" type="text" onChange={(e) => this.setState({ description: e.target.value })} /><br />
                 producent loda: <input className="formInput" type="text" onChange={(e) => this.setState({ producer: e.target.value })} /><br />
                 Cena loda: <input className="formInput" type="text" onChange={(e) => this.setState({ price: e.target.value })} /><br />
-                --------------------------------------<br />
+                <h3 className="headerOption">Właściwości loda</h3>
                 Czy amerykański:
                 <Form.Select aria-label="Czy Amerykański" className="iceProp" onChange={(e) => this.setState({ american: e.target.value })}>
                     <option value={Boolean(false)}>Nie</option>
@@ -146,7 +146,7 @@ class AddingIceDis extends React.Component {
                     <option value={Boolean(false)}>Nie</option>
                     <option value={Boolean(true)}>Tak</option>
                 </Form.Select>
-                <button className="formButton" onClick={() => this.dodaj()}>Dodaj</button>
+                <button className="subEditOption" onClick={() => this.dodaj()}>Dodaj</button>
             </div>
         )
 

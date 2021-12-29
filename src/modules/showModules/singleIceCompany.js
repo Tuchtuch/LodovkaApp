@@ -1,8 +1,10 @@
 import React from 'react';
-//import { propTypes } from 'react-bootstrap/esm/Image';
 import { connect } from 'react-redux';
 import { setMainViewApp } from '../../redux/actions';
-import firebase from '@firebase/app-compat';
+import firebase from 'firebase/compat/app'; //v9
+//import 'firebase/compat/firestore'; //v9
+//import 'firebase/compat/auth'; //v9
+//import 'firebase/compat/storage';
 import Iframe from 'react-iframe';
 import { setLoader } from '../../redux/actions';
 import noImg from '../../images/noImg.png';
@@ -53,10 +55,26 @@ class SingleIceCompanyDis extends React.Component {
         return "https://maps.google.com/maps?q=" + lat + ", " + long + "&z=15&output=embed";
 
     }
+    showImage(imgLink){
+        if(!imgLink){
+            return (<img src={noImg} alt="img" />)
+        }
+        else {
+            return (<img src={imgLink} className="singleIceCompanyImg" alt="logo"/>)
+        }
+    }
+    showIceImage(imgLink){
+        if(!imgLink){
+            return (<img src={noImg} alt="img" />)
+        }
+        else {
+            return (<img src={imgLink} className="singleIceImg" alt="logo"/>)
+        }
+    }
     iceToSingle = ice => {
         return (
             <div className="iceInCompany">
-                <div className="iceInCompanyImg"><img src={noImg} alt="img" /></div>
+                <div className="iceInCompanyImg">{this.showIceImage(ice.imgLink)}</div>
                 <div className="iceInCompanyCenter">
                     <h2 className="iceH2">{ice.name}</h2>
                     <h3 className="iceH3">{ice.description}</h3>
@@ -73,7 +91,7 @@ class SingleIceCompanyDis extends React.Component {
         return (
             <div className="IceCompanyMain">
                 <div className="showIceCompany">
-                    <div className="showIceCompanyLeft"><img src={noImg} alt="Logo" /></div>
+                    <div className="showIceCompanyLeft">{this.showImage(this.state.company.imgLink)}</div>
                     <div className="showIceCompanyCenter">&nbsp;</div>
                     <div className="showIceCompanyRight"><h2 className="companyWelcome">{this.state.company.powitanie}</h2><br />{this.state.company.description}<br /><br />{this.state.company.city}, ul. {this.state.company.street}</div>
                 </div>
@@ -95,7 +113,6 @@ class SingleIceCompanyDis extends React.Component {
             </div>
         )
     }
-
 }
 const SingleIceCompany = connect(
     null,
