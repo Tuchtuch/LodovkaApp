@@ -37,32 +37,34 @@ class AddingFileDis extends React.Component {
         if (this.state.option === 0) {
             path = 'companies';
         }
-        else if(this.state.option === 1){
+        else if (this.state.option === 1) {
             path = 'icecreams';
         }
         var metadata = {
             contentType: 'image/jpeg'
         };
+        this.props.setLoader(true);
         var uuid = require("uuid");
         var id = uuid.v4();
         // Upload file and metadata to the object 'images/mountains.jpg'
         var uploadTask = firebase.storage().ref().child(path + '/' + id).put(this.state.file, metadata);
-
         // Listen for state changes, errors, and completion of the upload.
         uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
             (snapshot) => {
                 // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-                var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                console.log('Upload is ' + progress + '% done');
+                //var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                //console.log('Upload is ' + progress + '% done');
                 switch (snapshot.state) {
                     case firebase.storage.TaskState.PAUSED: // or 'paused'
                         console.log('Upload is paused');
+                        this.props.setLoader(false);
                         break;
                     case firebase.storage.TaskState.RUNNING: // or 'running'
                         console.log('Upload is running');
                         break;
                     default:
                         console.log('Error');
+                        this.props.setLoader(false);
                 }
             },
             (error) => {
@@ -70,25 +72,30 @@ class AddingFileDis extends React.Component {
                 // https://firebase.google.com/docs/storage/web/handle-errors
                 switch (error.code) {
                     case 'storage/unauthorized':
+                        this.props.setLoader(false);
                         // User doesn't have permission to access the object
                         break;
                     case 'storage/canceled':
+                        this.props.setLoader(false);
                         // User canceled the upload
                         break;
 
                     // ...
 
                     case 'storage/unknown':
+                        this.props.setLoader(false);
                         // Unknown error occurred, inspect error.serverResponse
                         break;
                     default:
                         console.log('Error');
+                        this.props.setLoader(false);
                 }
             },
             () => {
                 // Upload completed successfully, now we can get the download URL
                 uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-                    console.log('File available at', downloadURL);
+                    // console.log('File available at', downloadURL);
+                    this.props.setLoader(false);
                     if (this.state.option === 0) {
                         //Jak firma
                         firebase.firestore().collection('companies')
@@ -100,11 +107,13 @@ class AddingFileDis extends React.Component {
                     else if (this.state.option === 1) {
                         //jak lód
                         firebase.firestore().collection('icecreams')
-                        .doc(this.state.iceCreamId)
-                        .update({
-                            "imgLink": downloadURL,
-                        });
+                            .doc(this.state.iceCreamId)
+                            .update({
+                                "imgLink": downloadURL,
+                            });
                     }
+                    this.props.setSubViewApp(1);
+                    this.props.setSubViewApp(3);
                 });
 
             }
@@ -119,17 +128,23 @@ class AddingFileDis extends React.Component {
             return false;
         }
         else {
-            var maxFileSize = 200000; //200KB~
+            var maxFileSize = 500000; //500KB~
             var ext = this.state.file.name.split('.').pop();
-            if (this.state.file.size > maxFileSize) return false;
-            if (!imageExt.includes(ext)) return false;
+            if (this.state.file.size > maxFileSize) {
+                alert('Za duży rozmiar! Max 500kB!');
+                return false;
+            }
+            if (!imageExt.includes(ext)) {
+                alert('Blędne rozszerzenie!');
+                return false;
+            }
+
             return true;
         }
     }
 
     onChange(e) {
         var file = e.target.files;
-        //console.log(file[0]);
         this.setState({ file: file[0] });
     }
     showButton() {

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { setSubViewApp } from '../../redux/actions';
 import Logo from '../../images/logo_navbar.png';
 import '../../styles/ButtonLogin.css';
-
+import Robot from '../../images/robotHelper.png';
 
 function mapDispatchToProps(dispatch) {
     return {
@@ -34,6 +34,7 @@ class UnloggedNavbarDis extends React.Component {
             <div className="navBar">
                 <div className="logoNavBar"><img src={Logo} alt ="Logo"  onClick={()=>this.props.setSubViewApp(1)} /></div>
                 <div className="logginButtons"><button className="NavbarButton" onClick={()=>this.openLogin()}>Zaloguj się</button><button className="NavbarButton" onClick={()=>this.openRegister()}>Dołącz</button></div>
+                <div className="robot"><img src={Robot} alt="Robot" onClick={() => this.props.setSubViewApp(4)} /></div>
             </div>
         )
     }

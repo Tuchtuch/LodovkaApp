@@ -8,6 +8,7 @@ import '../../styles/ButtonLogin.css';
 import firebase from 'firebase/compat/app'; //v9
 import { setLoggedUserId } from '../../redux/actions';
 import { APPSTATE_LOGGED_OFF } from '../../redux/constants/action_types';
+import Robot from '../../images/robotHelper.png';
 
 function mapDispatchToProps(dispatch) {
     return {
@@ -25,23 +26,24 @@ class LoggedNavbarDis extends React.Component {
         }
     }
 
-    logout(){
+    logout() {
         firebase.auth().signOut();
         this.props.setLoggedUserId('');
         this.props.setAppstate(APPSTATE_LOGGED_OFF);
         this.props.setSubViewApp(1);
     }
 
-    zarzadzaj(){
+    zarzadzaj() {
         this.props.setSubViewApp(3);
     }
 
 
-    render(){
-        return(
+    render() {
+        return (
             <div className="navBar">
-                <div className="logoNavBar"><img src={Logo} alt ="Logo" onClick={()=>this.props.setSubViewApp(1)} /></div>
-                <div className="logginButtons"><button className="NavbarButton" onClick={()=>this.logout()}>Wyloguj się</button><button className="NavbarButton" onClick={()=>this.zarzadzaj()}>Zarządzaj</button></div>
+                <div className="logoNavBar"><img className="logoMain" src={Logo} alt="Logo" onClick={() => this.props.setSubViewApp(1)} /></div>
+                <div className="logginButtons"><button className="NavbarButton" onClick={() => this.logout()}>Wyloguj się</button><button className="NavbarButton" onClick={() => this.zarzadzaj()}>Zarządzaj</button></div>
+                <div className="robot"><img src={Robot} alt="Robot" onClick={() => this.props.setSubViewApp(4)} /></div>
             </div>
         )
     }

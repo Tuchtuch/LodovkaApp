@@ -41,7 +41,7 @@ class SingleLodovkaCenterDis extends React.Component {
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.ladujLody()
     }
 
@@ -51,24 +51,24 @@ class SingleLodovkaCenterDis extends React.Component {
         const snapshot2 = await firebase.firestore().collection('icecreams').doc(this.state.secondRecommend).get();
         const snapshot3 = await firebase.firestore().collection('icecreams').doc(this.state.thirdRecommend).get();
         this.setState({
-            pierwszyLod : snapshot1.data().name,
-            drugiLod : snapshot2.data().name,
-            trzeciLod : snapshot3.data().name
+            pierwszyLod: snapshot1.data().name,
+            drugiLod: snapshot2.data().name,
+            trzeciLod: snapshot3.data().name
 
         })
         this.props.setLoader(false);
     }
-    PokazLoda(key){
+    PokazLoda(key) {
         this.props.setIceCream(key);
         this.props.setIceCompany(this.state.id);
         this.props.setSubViewApp(2);
     }
-    showImage(imgLink){
-        if(!imgLink){
-            return (<div><img src={noImg} alt="img" /></div>)
+    showImage(imgLink) {
+        if (!imgLink) {
+            return (<div><img src={noImg} alt="img" onClick={() => this.PokazLoda(this.state.firstRecommend)} /></div>)
         }
         else {
-            return (<img src={imgLink} className="singleLodovkaImg" alt="logo"/>)
+            return (<img src={imgLink} className="singleLodovkaImg" onClick={() => this.PokazLoda(this.state.firstRecommend)} alt="logo" />)
         }
     }
     render() {
@@ -78,9 +78,9 @@ class SingleLodovkaCenterDis extends React.Component {
                 <div className="bottomICB">
                     <div className="leftBottomICB">
                         <ul>
-                            <li onClick={()=>this.PokazLoda(this.state.firstRecommend)}>{this.state.pierwszyLod}</li><div className="smallDott" style={{ background: this.state.firstColor, boxShadow: '0px 0px 1.5px ' + this.state.firstColor + '' }} ></div>
-                            <li onClick={()=>this.PokazLoda(this.state.secondRecommend)}>{this.state.drugiLod}</li><div className="smallDott" style={{ background: this.state.secondColor, boxShadow: '0px 0px 1.5px ' + this.state.secondColor + '' }}></div>
-                            <li onClick={()=>this.PokazLoda(this.state.thirdRecommend)}>{this.state.trzeciLod}</li><div className="smallDott" style={{ background:  this.state.thirdColor, boxShadow: '0px 0px 1.5px ' + this.state.thirdColor + '' }}></div>
+                            <li onClick={() => this.PokazLoda(this.state.firstRecommend)}>{this.state.pierwszyLod}</li><div className="smallDott" style={{ background: this.state.firstColor, boxShadow: '0px 0px 1.5px ' + this.state.firstColor + '' }} ></div>
+                            <li onClick={() => this.PokazLoda(this.state.secondRecommend)}>{this.state.drugiLod}</li><div className="smallDott" style={{ background: this.state.secondColor, boxShadow: '0px 0px 1.5px ' + this.state.secondColor + '' }}></div>
+                            <li onClick={() => this.PokazLoda(this.state.thirdRecommend)}>{this.state.trzeciLod}</li><div className="smallDott" style={{ background: this.state.thirdColor, boxShadow: '0px 0px 1.5px ' + this.state.thirdColor + '' }}></div>
                         </ul>
                     </div>
                     <div className="rightBottomICB">

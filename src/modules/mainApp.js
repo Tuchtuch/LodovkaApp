@@ -7,6 +7,7 @@ import SingleIceCompany from './showModules/singleIceCompany';
 import firebase from '@firebase/app-compat';
 import AddingIceCompany from '../modules/showModules/addingIceCompany';
 import { setLoader } from '../redux/actions';
+import RobotFull from '../images/robotFull.png'
 //import { doc, onSnapshot } from "firebase/firestore";
 
 
@@ -32,7 +33,19 @@ class MainAppDis extends React.Component {
         this.state = {
             companies: '',
             companiesIds: [],
+            allIces: '',
+            allIcesIds: []
         }
+    }
+
+    async ladujLody() {
+        this.props.setLoader(true);
+        const snapshot = await firebase.firestore().collection('icecreams').get();
+        this.setState({
+            allIces: snapshot.docs.map(doc => doc.data()),
+            allIcesIds: snapshot.docs.map(doc => doc.id)
+        })
+        this.props.setLoader(false)
     }
 
     iceCompanyToSingle = icecompany => {
@@ -71,10 +84,65 @@ class MainAppDis extends React.Component {
     }
     componentDidMount() {
         this.ladujFirmy();
+        this.ladujLody();
     }
     maperIceCompany() {
-        currentId=0;
+        currentId = 0;
         return (this.state.companies.map(this.iceCompanyToSingle))
+    }
+    filtruj(element) {
+        if(element.fruity===true || element.fruity==='true') return true; else return false
+    }
+    ekspertowySystem() {
+        var ices = [];
+        ices = this.state.allIces;
+        ices = ices.filter(this.filtruj);
+        var pytania = [
+            'Czy masz ochotę na loda amerykańskiego?',          //[0] - american
+            'Czy zjadłbyś coś owocowego?',                      //[1] - fruity
+            'Czy chciałbyś loda z polewą?',                     //[2] - icing
+            'Może naszła Cię ochota na loda włoskiego?',        //[3] - italy
+            'Czy interesuje Cię lód mleczny?',                  //[4] - milky
+            'Czy chciałbyś spróbować słonych smaków?',          //[5] - salty
+            'Może orzeźwiłbyś się sorbetem?',                   //[6] - sherbet
+            'A może zjadłbyś coś kwaskowatego?',                //[7] - sour
+            'Masz ochotę pochrupać wafelka?',                   //[8] - withWaffle
+            'Masz ochotę na orzeszki?'                          //[9] - withnuts
+        ]
+        var cechy = [
+            'american',
+            'fruity',
+            'icing',
+            'italy',
+            'milky',
+            'salty',
+            'sherbet',
+            'sour',
+            'withWaffle',
+            'withnuts'
+        ]
+
+        var step = 0;
+        var mainTitle = '';
+        var subText = '';
+        if (step === 0) {
+            mainTitle = "Witaj!";
+            subText = "Jeżeli nie moższ się zdecydować na co masz dzisiaj ochotę, powiedz mi co lubisz. Wybiorę dla Ciebie najsmaczniejsze lody. Wystarczy, że odpowiesz na parę pytań...";
+        }
+
+        if (this.state.allIces.length > 3) {
+            console.log(ices)
+            return (
+                <div className="eskpertowyTable">
+                    <div className="trescChmury"><h2 className="expertH2">{mainTitle}</h2><h3 className="expertH3">{subText}</h3></div>
+                    <img src={RobotFull} alt="robotFull" />
+                </div>
+            )
+        }
+        else {
+            //Wyświetl lody
+        }
+
     }
 
     showIceCompaniesModule() {
@@ -87,9 +155,6 @@ class MainAppDis extends React.Component {
             return ("brak firm")
         }
     }
-
-
-
     renderSwitch() {
         switch (this.props.subViewAppState) {
             case 1: return (
@@ -114,7 +179,12 @@ class MainAppDis extends React.Component {
                 }
             case 3: return (
                 <div className="mainApp">
-                   <AddingIceCompany/>
+                    <AddingIceCompany />
+                </div>
+            );
+            case 4: return (
+                <div className="mainApp">
+                    {this.ekspertowySystem()}
                 </div>
             );
             default: return (<div>{console.log(this.props.subViewAppState)}DOMYŚLNY</div>);

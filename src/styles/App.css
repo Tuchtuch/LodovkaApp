@@ -13,6 +13,15 @@ div.navBar {
     z-index: 1;
 }
 
+div.robot {
+    position: absolute;
+    height: 120px;
+    width: 200px;
+    margin-left: 30%;
+    z-index: 2;
+    margin-top: 4px;
+}
+
 @font-face {
     font-family: Quicksand;
     src: url(../styles/quicksand.ttf);
@@ -184,7 +193,7 @@ div.showIceCompany {
     width: 1100px;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     border-radius: 10px;
-    display:flex;
+    display: flex;
 }
 
 
@@ -192,54 +201,61 @@ div.showIceCompanyLeft {
     background: rgb(255, 227, 186);
     flex-direction: row;
     width: 517px;
-    text-align:center;
+    text-align: center;
     padding-top: 20px;
     padding-bottom: 20px;
 }
 
 div.showIceCompanyCenter {
     width: 66px;
-    float:left;
+    float: left;
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-image: url('../images/iceCompanyCenter.png');
     flex-direction: row;
 }
+
 div.showIceCompanyRight {
     background: rgb(221, 242, 255);
     flex-direction: row;
     width: 517px;
-    text-align:left;
+    text-align: left;
     padding-left: 80px;
     padding-bottom: 30px;
     padding-top: 25px;
-    color:rgb(80, 80, 80)
+    color: rgb(80, 80, 80)
 }
-h2.companyWelcome{
+
+h2.companyWelcome {
     padding: 0 0 0 0;
     margin: 0 0 0 0;
     font-size: 20px;
     font-weight: bold;
 }
-div.bottomInfo{
-        margin: 30px auto;
-        width: 1100px;
-        font-size: 12px;
+
+div.bottomInfo {
+    margin: 30px auto;
+    width: 1100px;
+    font-size: 12px;
 }
-div.detailsInCompany{
+
+div.detailsInCompany {
     margin: 0 auto;
-    width: 1100px; 
+    width: 1100px;
     display: flex;
 }
-div.productsInCompany{
+
+div.productsInCompany {
     flex-direction: row;
     width: 550px;
 }
-div.mapOfCompany{
+
+div.mapOfCompany {
     flex-direction: row;
     width: 550px;
 }
-div.iceInCompany{
+
+div.iceInCompany {
     width: 500px;
     min-height: 120px;
     display: flex;
@@ -247,22 +263,25 @@ div.iceInCompany{
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     margin: 40px 0 40px 0;
 }
-div.iceInCompanyImg{
+
+div.iceInCompanyImg {
     flex-direction: row;
     width: 150px;
     text-align: center;
     vertical-align: middle;
 }
-div.iceInCompanyCenter{
+
+div.iceInCompanyCenter {
     flex-direction: row;
     width: 350px;
-    text-align:center;
+    text-align: center;
     min-height: 100%;
     padding: 5px 105px 5px 5px;
 }
-div.iceInCompanyRight{
+
+div.iceInCompanyRight {
     width: 80px;
-    background: #f9d5ea;    
+    background: #f9d5ea;
     font-weight: bold;
     font-size: 18px;
     display: flex;
@@ -272,6 +291,7 @@ div.iceInCompanyRight{
     padding-left: 10px;
     padding-top: 44px;
 }
+
 div.loading_overflow {
     position: fixed;
     display: flex;
@@ -284,6 +304,7 @@ div.loading_overflow {
     background: rgba(0, 0, 0, 0.7);
     z-index: 99;
 }
+
 img.spinnerImg {
     margin: 0;
     position: absolute;
@@ -292,37 +313,50 @@ img.spinnerImg {
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 }
-h2.iceH2{
+
+img.logoMain {
+    cursor: pointer;
+}
+
+h2.iceH2 {
     padding: 15px 0 0 0;
     font-size: 16px;
     font-weight: bold;
     margin: 0 0 0 0;
 }
-h3.iceH3{
+
+h3.iceH3 {
     padding: 0 0 0 0;
     font-size: 12px;
     margin: 10px 0 0 0;
 }
-iframe{
+
+iframe {
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
 }
-div.otoczka{
+
+div.otoczka {
     max-height: 120px;
 
 }
-img.singleLodovkaImg{
+
+img.singleLodovkaImg {
     height: 110px;
     max-width: 300px;
+    cursor: pointer;
 }
-img.singleIceCompanyImg{
+
+img.singleIceCompanyImg {
     max-width: 500px;
     max-height: 500px;
 }
-img.singleIceImg{
+
+img.singleIceImg {
     max-width: 140px;
     max-height: 300px;
 }
-button.editOption{
+
+button.editOption {
     background: white;
     border: solid 2px black;
     border-radius: 10px;
@@ -331,27 +365,32 @@ button.editOption{
     font-size: 18px;
     margin-left: 30px;
 }
-button.editOption:hover{
+
+button.editOption:hover {
     background: rgb(232, 250, 255);
     box-shadow: 0px 0px 10px rgb(131, 236, 255);
 }
-button.editOption:active{
+
+button.editOption:active {
     scale: 95%;
 }
-h3.viewComp{
+
+h3.viewComp {
     font-size: 12px;
     font-weight: bold;
     padding: 0 0 0 0;
     margin: 10px 0 10px 0;
-    font-style:italic;
+    font-style: italic;
 }
-h3.headerOption{
+
+h3.headerOption {
     font-size: 20px;
     padding: 0 0 0 0;
     margin: 30px 0 20px 0;
     border-bottom: solid 1px black;
 }
-button.subEditOption{
+
+button.subEditOption {
     background: white;
     border: solid 2px black;
     border-radius: 10px;
@@ -360,15 +399,17 @@ button.subEditOption{
     font-size: 18px;
     margin: 20px 0 30px 80px;
 }
-button.subEditOption:hover{
+
+button.subEditOption:hover {
     background: rgb(232, 250, 255);
     box-shadow: 0px 0px 10px rgb(131, 236, 255);
 }
-button.subEditOption:active{
+
+button.subEditOption:active {
     scale: 95%;
 }
 
-input.fileButton{
+input.fileButton {
     background: white;
     border: solid 2px black;
     border-radius: 10px;
@@ -377,10 +418,51 @@ input.fileButton{
     font-size: 16px;
     margin: 20px 0 30px 80px;
 }
-input.formInput{
+
+input.formInput {
     width: 100%;
     margin: 0px 0 15px 0;
 }
-div.colorRec input{
+
+div.colorRec input {
     width: 160px;
+}
+
+div.eskpertowyTable {
+    width: 1100px;
+    height: 200px;
+    margin: 0 auto;
+    background: #ddf2ff;
+    margin-bottom: 100px;
+    padding-top: 30px;
+    padding-left: 90px;
+}
+
+div.eskpertowyTable img {
+    position: relative;
+    margin-left: 730px;
+    margin-top: -178px;
+}
+
+div.trescChmury {
+    width: 700px;
+    height: 148px;
+    background-image: url('../images/cloud.png');
+    text-align: center;
+    padding-top: 40px;
+    padding-left: 20px; 
+    padding-right: 100px;
+}
+
+.expertH2 {
+    font-weight: bold;
+    font-size: 18px;
+    padding: 0 0 0 0;
+    margin: 0 0 4px 0;
+}
+
+.expertH3 {
+    font-size: 14px;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
 }
