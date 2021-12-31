@@ -466,3 +466,34 @@ div.trescChmury {
     padding: 0 0 0 0;
     margin: 0 0 0 0;
 }
+button.expertButton {
+    background: white;
+    border: solid 1px black;
+    border-radius: 6px;
+    padding: 2px 10px 2px 10px;
+    width: 80px;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+button.expertButton:hover {
+    background: rgb(232, 250, 255);
+    box-shadow: 0px 0px 10px rgb(131, 236, 255);
+}
+
+button.expertButton:active {
+    scale: 95%;
+}
+div.proponowaneLody{
+    width: 900px;
+    margin: 0 auto;
+}
+div.iceInCompanyLink {
+    width: 500px;
+    min-height: 120px;
+    display: flex;
+    background: #ddf2ff;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    margin: 40px 0 40px 0;
+    cursor: pointer;
+}
