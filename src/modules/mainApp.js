@@ -12,6 +12,9 @@ import RobotFull from '../images/robotFull.png'
 import noImg from '../images/noImg.png';
 import { setIceCream } from '../redux/actions';
 import { setIceCompany } from '../redux/actions';
+import ShowFiltered from './showFiltered';
+import '../styles/ButtonSearchbar.css';
+import ShowFilteredCity from './showFilteredCity';
 
 function mapDispatchToProps(dispatch) {
     return {
@@ -42,6 +45,7 @@ class MainAppDis extends React.Component {
             step: 0,
             pytania: [],
             cechy: [],
+            filteredValue: ''
         }
     }
 
@@ -55,6 +59,15 @@ class MainAppDis extends React.Component {
         this.props.setLoader(false)
     }
 
+    searchBar() {
+        return (
+            <div className="searchBar">
+                <div className="topHeader">Zajrzyj do naszej Lodóvki i sprawdź najnowsze smaki...</div>
+                <div className="searchInput"><input className="SearchbarText" type="text" onChange={(e) => this.setState({ filteredValue: e.target.value })} placeholder="Wyszukaj..." /><button className="Searchbar" onClick={()=>this.props.setSubViewApp(6)}>Szukaj...</button></div>
+            </div>
+        )
+    }
+
     stepChanging(val) {
         this.zaladujPytania();
         this.ladujLody();
@@ -64,9 +77,6 @@ class MainAppDis extends React.Component {
         })
     }
     stepChangingB(val, cech, cechBul, randVal) {
-        //var ices = [];
-        //ices = this.state.allIces;
-        //ices = ices.filter(this.filtruj,cech);
         var pomPytania = this.state.pytania;
         var pomCechy = this.state.cechy;
         pomPytania.splice(randVal, 1);
@@ -261,7 +271,6 @@ class MainAppDis extends React.Component {
             button = '';
             button1 = <button className="expertButton" onClick={() => this.stepChangingB(2, this.state.cechy[random], true, random)}>Tak!</button>
             button2 = <button className="expertButton" onClick={() => this.stepChangingB(2, this.state.cechy[random], false, random)}>Nie!</button>
-            console.log(this.state.allIces.length)
         }
 
 
@@ -334,38 +343,64 @@ class MainAppDis extends React.Component {
     renderSwitch() {
         switch (this.props.subViewAppState) {
             case 1: return (
-                <div className="mainApp">
-                    {this.showIceCompaniesModule()}
+                <div>{this.searchBar()}
+                    <div className="mainApp">
+                        {this.showIceCompaniesModule()}
+                    </div>
                 </div>
             );
             case 2:
                 if (this.props.iceCream) {
                     return (
-                        <div className="mainApp">
-                            <SingleIceCompany id={this.props.iceCompany} />
+                        <div>{this.searchBar()}
+                            <div className="mainApp">
+                                <SingleIceCompany id={this.props.iceCompany} />
+                            </div>
                         </div>
                     );
                 }
                 else {
                     return (
-                        <div className="mainApp">
-                            Nieoczekiwany błąd
+                        <div>{this.searchBar()}
+                            <div className="mainApp">
+                                Nieoczekiwany błąd
+                            </div>
                         </div>
                     );
                 }
             case 3: return (
-                <div className="mainApp">
-                    <AddingIceCompany />
+                <div>{this.searchBar()}
+                    <div className="mainApp">
+                        <AddingIceCompany />
+                    </div>
                 </div>
             );
             case 4: return (
-                <div className="mainApp">
-                    {this.ekspertowySystem()}
+                <div>{this.searchBar()}
+                    <div className="mainApp">
+                        {this.ekspertowySystem()}
+                    </div>
                 </div>
             );
             case 5: return (
-                <div className="mainApp">
-                    <SingleIceCompany id={this.props.iceCompany} />
+                <div>{this.searchBar()}
+                    <div className="mainApp">
+                        <SingleIceCompany id={this.props.iceCompany} />
+                    </div>
+                </div>
+            );
+            case 6: return (
+                <div>{this.searchBar()}
+                    <div className="mainApp">
+                        <ShowFiltered filteredValue={this.state.filteredValue} />
+                    </div>
+                </div>
+            );
+            case 7: return (
+                <div>{this.searchBar()}
+                    <div className="mainApp">
+                        <ShowFilteredCity filteredValue={this.props.mainViewAppState} />
+                    </div>
                 </div>
             );
             default: return (<div>{console.log(this.props.subViewAppState)}DOMYŚLNY</div>);

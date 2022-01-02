@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import MainApp from './modules/mainApp';
 import UnloggedNavbar from './modules/navBars/unloggedNavbar';
 import LoggedNavbar from './modules/navBars/loggedNavbar';
-import SearchBar from './modules/searchBar';
 import CityBar from './modules/cityBar';
 import LoginPanel from './loginPanel';
 import RegisterPanel from './registerPanel';
@@ -41,7 +40,6 @@ const funcApp = ({ appState }) => {
         <LoginPanel/>
         <RegisterPanel/>
         <UnloggedNavbar/>
-        <SearchBar/>
         <MainApp/>
         <CityBar/>
       </div>
@@ -51,7 +49,6 @@ const funcApp = ({ appState }) => {
         <LoginPanel/>
         <RegisterPanel/>
         <LoggedNavbar/>
-        <SearchBar/>
         <MainApp/>
         <CityBar/>
       </div>
