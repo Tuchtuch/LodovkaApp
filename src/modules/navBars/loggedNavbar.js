@@ -31,6 +31,7 @@ class LoggedNavbarDis extends React.Component {
         this.props.setLoggedUserId('');
         this.props.setAppstate(APPSTATE_LOGGED_OFF);
         this.props.setSubViewApp(1);
+        alert('Wylogowano!');
     }
 
     zarzadzaj() {

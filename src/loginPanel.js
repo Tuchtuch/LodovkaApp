@@ -7,13 +7,16 @@ import { APPSTATE_LOGGED_AS_USER } from './redux/constants/action_types';
 import LoginLogo from './images/loginLogo.png';
 import Close from './images/icons/close.png';
 import firebase from '@firebase/app-compat';
+import { setLoader} from './redux/actions';
 
 
 function mapDispatchToProps(dispatch) {
     return {
         setSubViewApp: subViewAppState => dispatch(setSubViewApp(subViewAppState)),
         setAppstate: appState => dispatch(setAppstate(appState)),
-        setLoggedUserId: loggedUserId => dispatch(setLoggedUserId(loggedUserId))
+        setLoggedUserId: loggedUserId => dispatch(setLoggedUserId(loggedUserId)),
+        setLoader: isLoading => dispatch(setLoader(isLoading))
+
     };
 }
 
@@ -30,7 +33,7 @@ class LoginPanelDis extends React.Component {
         document.getElementsByClassName("loginWindowOverflow")[0].style.display = 'none';
     }
     login() {
-
+            this.props.setLoader(true);
             firebase.auth()
             .signInWithEmailAndPassword(this.state.userName, this.state.password)
             .then((userCredential) => {
@@ -39,9 +42,12 @@ class LoginPanelDis extends React.Component {
                 this.props.setAppstate(APPSTATE_LOGGED_AS_USER);
                 this.showOverflow();
                 this.props.setSubViewApp(1);
+                this.props.setLoader(false);
                 // ...
               })
               .catch((error) => {
+                this.props.setLoader(false);
+                alert('Błędne logowanie!');
                 //const errorCode = error.code;
                 //const errorMessage = error.message;
               });
